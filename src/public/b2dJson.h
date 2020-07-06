@@ -23,8 +23,8 @@
 #include <map>
 #include <set>
 #include <string>
-#include <Box2D/Box2D.h>
-#include "json/json.h"
+#include <liquidfun/LiquidFun.h>
+#include <rapidjson/rapidjson.h>
 
 class b2dJsonImage;
 

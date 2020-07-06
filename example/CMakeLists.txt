@@ -21,29 +21,19 @@ add_executable(b2djsonex
 
 add_subdirectory("${CMAKE_CURRENT_LIST_DIR}/.." b2djson)
 
-# ------------------ BOX2D ------------------
+# ------------------ LIQUIDFUN ------------------
 message(STATUS "Fetching LiquidFun...")
 FetchContent_Declare(
-		Box2D
+		liquidfun
 		GIT_REPOSITORY https://github.com/Heerdam/liquidfun.git
-		SOURCE_SUBDIR liquidfun/Box2D
 )
-FetchContent_GetProperties(Box2D)
-if(NOT box2d_POPULATED)
-
-	option(BOX2D_INSTALL_DOC "Install Box2D documentation" OFF)
-	option(BOX2D_BUILD_SHARED "Build Box2D shared libraries" OFF)
-	option(BOX2D_BUILD_STATIC "Build Box2D static libraries" ON)
-	option(BOX2D_BUILD_EXAMPLES "Build Box2D examples" OFF)
-	option(BOX2D_BUILD_UNITTESTS "Build Box2D Unit Tests" OFF)
-	# NOTE: Code coverage only works on Linux & OSX.
-	option(BOX2D_CODE_COVERAGE "Enable the code coverage build option." OFF)
-
-	FetchContent_Populate(Box2D)
-	add_subdirectory("${box2d_SOURCE_DIR}/liquidfun/Box2D" "${box2d_BINARY_DIR}/liquidfun/Box2D")
+FetchContent_GetProperties(liquidfun)
+if(NOT liquidfun_POPULATED)
+	FetchContent_Populate(liquidfun)
+	add_subdirectory("${liquidfun_SOURCE_DIR}" "${liquidfun_BINARY_DIR}")
 endif()
 
 target_link_libraries(b2djsonex
 		b2djson
-		Box2D	
+		liquidfun	
 )
