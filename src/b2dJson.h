@@ -24,7 +24,7 @@
 #include <set>
 #include <string>
 #include <liquidfun/LiquidFun.h>
-#include <rapidjson/rapidjson.h>
+#include "json/json.h"
 
 class b2dJsonImage;
 

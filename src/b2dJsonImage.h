@@ -21,7 +21,7 @@
 
 
 #include <string>
-#include <Box2D/Box2D.h>
+#include <liquidfun/LiquidFun.h>
 
 enum _b2dJsonImagefilterType {
     FT_NEAREST,

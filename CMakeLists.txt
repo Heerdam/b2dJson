@@ -16,38 +16,15 @@ endif()
 include(FetchContent)
 
 add_library(b2djson STATIC
-	src/public/b2dJson.h
-	src/public/b2dJsonImage.h
-	src/public/b2dJsonImage_OpenGL.h
-	src/public/bitmap.h
+	src/b2dJson.h
+	src/b2dJsonImage.h
+	src/bitmap.h
 	
-	src/private/b2dJson.cpp
-	src/private/b2dJsonImage.cpp
-	src/private/b2dJsonImage_OpenGL.cpp
+	src/b2dJson.cpp
+	src/b2dJsonImage.cpp
 )
 
-target_include_directories(b2djson PUBLIC ${CMAKE_CURRENT_LIST_DIR}/src/public)
-
-# ------------------ RAPIDJSON ------------------
-find_package (rapidjson 1.1.0 QUIET)
-if(rapidjson_FOUND)
-	message(STATUS "RapidJSON found!")
-else()
-	message(STATUS "RapidJSON not found! Fetching...")
-	FetchContent_Declare(
-			rapidjson
-			GIT_REPOSITORY https://github.com/Tencent/rapidjson
-	)
-	FetchContent_GetProperties(rapidjson)
-	if(NOT rapidjson_POPULATED)
-		option(RAPIDJSON_BUILD_DOC "Build rapidjson documentation." OFF)
-		option(RAPIDJSON_BUILD_EXAMPLES "Build rapidjson examples." OFF)
-		option(RAPIDJSON_BUILD_TESTS "Build rapidjson perftests and unittests." OFF)
-
-		FetchContent_Populate(rapidjson)
-		add_subdirectory("${rapidjson_SOURCE_DIR}" "${rapidjson_BINARY_DIR}")
-	endif()
-endif ()
+target_include_directories(b2djson PUBLIC ${CMAKE_CURRENT_LIST_DIR}/src)
 
 # ------------------ LIQUIDFUN ------------------
 message(STATUS "Fetching LiquidFun...")
@@ -62,6 +39,5 @@ if(NOT liquidfun_POPULATED)
 endif()
 
 target_link_libraries(b2djson PUBLIC
-		rapidjson
 		liquidfun	
 )
